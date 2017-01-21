@@ -1,5 +1,5 @@
 # go-k8s-hello
-"HELLO WORLD" ~ Golang, Kubernetes, Microservice, GCP
+"HELLO WORLD" ~ Golang, Kubernetes, Microservice, GCP, CircleCI
 
 ```
 $ go run main.go 
