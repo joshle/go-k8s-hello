@@ -21,9 +21,9 @@ test:
   override:
     - go test -cpu=2 -race -v -covermode=atomic ./...
   post:
-    - echo eu.gcr.io/${GCP_PROJECT}/${PROJECT_NAME}:$CIRCLE_SHA1
     - docker build -t eu.gcr.io/${GCP_PROJECT}/${PROJECT_NAME}:$CIRCLE_SHA1 .
-    - docker tag eu.gcr.io/${GCP_PROJECT}/${PROJECT_NAME}:$CIRCLE_SHA1 eu.gcr.io/${GCP_POJECT}/${PROJECT_NAME}:latest
+    #- docker tag eu.gcr.io/${GCP_PROJECT}/${PROJECT_NAME}:$CIRCLE_SHA1 eu.gcr.io/${GCP_POJECT}/${PROJECT_NAME}:latest
+    #     https://cloud.google.com/sdk/gcloud/reference/alpha/container/images/add-tag
 
 deployment:
   prod:
