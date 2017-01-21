@@ -1,0 +1,8 @@
+dependencies:
+  override:
+    - go get -t -d -v ./...
+    - go build -v
+
+test:
+  - go vet $(go list ./... | grep -v /vendor/)
+  - go test -cpu=2 -race -v -covermode=atomic ./...
