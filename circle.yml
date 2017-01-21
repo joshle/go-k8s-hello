@@ -4,7 +4,7 @@ dependencies:
     - go build -v
 
 test:
-  vet:
+  pre:
     - go vet $(go list ./... | grep -v /vendor/)
-  gotest:
+  override:
     - go test -cpu=2 -race -v -covermode=atomic ./...
