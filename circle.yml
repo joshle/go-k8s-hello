@@ -1,12 +1,35 @@
 machine:
   environment:
-    # GOROOT is not set by default
+    PROJECT_NAME: go-k8s-hello
     GOROOT: ""
     PATH: "/usr/local/go/bin:/usr/local/go_workspace/bin:~/.go_workspace/bin:${PATH}"
     GOPATH: "${HOME}/.go_workspace:/usr/local/go_workspace:${HOME}/.go_project"
+
+dependencies:
+  pre:
+    - sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update --version 120.0.0
+    - sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update --version 120.0.0 kubectl
+    - echo $GCLOUD_SERVICE_KEY | base64 --decode -i > ${HOME}/gcloud-service-key.json
+    - sudo /opt/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+    - sudo /opt/google-cloud-sdk/bin/gcloud config set project $PROJECT_NAME
+    - sudo /opt/google-cloud-sdk/bin/gcloud --quiet config set container/cluster $CLUSTER_NAME
+    - sudo /opt/google-cloud-sdk/bin/gcloud config set compute/zone ${CLOUDSDK_COMPUTE_ZONE}
+    - sudo /opt/google-cloud-sdk/bin/gcloud --quiet container clusters get-credentials $CLUSTER_NAME
 
 test:
   pre:
     - go vet $(go list ./... | grep -v /vendor/)
   override:
     - go test -cpu=2 -race -v -covermode=atomic ./...
+  post:
+    - docker build -t eu.gcr.io/${GCP_PROJECT}/${PROJECT_NAME}:$CIRCLE_SHA1 .
+    - docker tag eu.gcr.io/${GCP_PROJECT}/${PROJECT_NAME}:$CIRCLE_SHA1 eu.gcr.io/${GCP_POJECT}/${PROJECT_NAME}:latest
+
+deployment:
+  prod:
+    branch: master
+    commands:
+      - sudo /opt/google-cloud-sdk/bin/gcloud docker push eu.gcr.io/${GCP_PROJECT}/${PROJECT_NAME}
+      - sudo chown -R ubuntu:ubuntu /home/ubuntu/.kube
+      - kubectl apply -f .gcloud/service.yaml --namespace=$GCP_NAMESPACE
+      - kubectl apply -f .gcloud/deployment.yaml --namespace=$GCP_NAMESPACE
