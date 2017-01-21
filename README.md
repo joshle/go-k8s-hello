@@ -1,4 +1,7 @@
 # go-k8s-hello
+
+[![CircleCI](https://circleci.com/gh/alexharveyeu/go-k8s-hello.svg?style=svg)](https://circleci.com/gh/alexharveyeu/go-k8s-hello)
+
 "HELLO WORLD" ~ Golang, Kubernetes, Microservice, GCP, CircleCI
 
 ```
