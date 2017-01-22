@@ -7,9 +7,6 @@ machine:
   services:
     - docker
 
-general:
-  build_dir: ../.go_workspace/src/$IMPORT_PATH
-
 dependencies:
   pre:
     - sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update --version 120.0.0
@@ -22,6 +19,7 @@ test:
   pre:
     - go vet $(go list ./... | grep -v /vendor/)
     - go test -cpu=2 -race -v -covermode=atomic ./...
+    - go build
     - docker build -t eu.gcr.io/${GCP_PROJECT}/${PROJECT_NAME}:$CIRCLE_SHA1 .
 
 deployment:
