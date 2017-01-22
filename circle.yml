@@ -19,8 +19,7 @@ test:
   pre:
     - go vet $(go list ./... | grep -v /vendor/)
     - go test -cpu=2 -race -v -covermode=atomic ./...
-    - docker build -t eu.gcr.io/${GCP_PROJECT}/${PROJECT_NAME}:$CIRCLE_SHA1 .
-    - pwd; ls
+    - docker build -t eu.gcr.io/${GCP_PROJECT}/${PROJECT_NAME}:$CIRCLE_SHA1 -f Dockerfile .
 
 deployment:
   prod:
