@@ -18,9 +18,7 @@ dependencies:
 test:
   pre:
     - go vet $(go list ./... | grep -v /vendor/)
-  override:
     - go test -cpu=2 -race -v -covermode=atomic ./...
-  post:
     - docker build -t eu.gcr.io/${GCP_PROJECT}/${PROJECT_NAME}:$CIRCLE_SHA1 .
 
 deployment:
