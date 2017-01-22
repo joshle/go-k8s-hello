@@ -1,0 +1,26 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: go-k8s-hello
+spec:
+  backend:
+    serviceName: go-k8s-hello
+    servicePort: 80
+  tls:
+    - secretName: "go-k8s-hello-tls"
+      hosts:
+        - "go-k8s-hello.afharvey.com"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-k8s-hello
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+  type: LoadBalancer
+  selector:
+    app: go-k8s-hello

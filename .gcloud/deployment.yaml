@@ -1,0 +1,28 @@
+---
+apiVersion: "extensions/v1beta1"
+kind: "Deployment"
+metadata:
+  name: {{PROJECT_NAME}}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{PROJECT_NAME}}
+        name: {{PROJECT_NAME}}
+    spec:
+      containers:
+      - name: "server"
+        image: "eu.gcr.io/{{GCP_PROJECT}}/{{PROJECT_NAME}}:{{IMAGE_TAG}}"
+        imagePullPolicy: "Always"
+        volumeMounts:
+        - name: "cacerts"
+          mountPath: "/etc/ssl/certs"
+          readOnly: true
+        ports:
+        - containerPort: 8080
+          protocol: "TCP"
+      volumes:
+      - name: "cacerts"
+        hostPath:
+          path: "/etc/ssl/certs"
