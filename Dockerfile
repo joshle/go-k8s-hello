@@ -8,4 +8,4 @@ ADD go-k8s-hello /
 EXPOSE 8080
 
 # Run our app on startup.
-CMD ["/go-k8s-hello"]
+ENTRYPOINT ["/go-k8s-hello"]

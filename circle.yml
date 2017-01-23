@@ -14,6 +14,8 @@ dependencies:
     - echo $GCP_SERVICE_KEY | base64 --decode -i > ${HOME}/gcloud-service-key.json
     - sudo /opt/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
     - sudo /opt/google-cloud-sdk/bin/gcloud --quiet container clusters get-credentials ${GCP_CLUSTER_NAME} --zone ${GCP_ZONE} --project ${GCP_PROJECT}
+  override:
+    - CGO_ENABLED=0 go build -v -a -installsuffix cgo
 
 test:
   pre:
