@@ -1,0 +1,13 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{PROJECT_NAME}}
+spec:
+  rules:
+    host: {{PROJECT_NAME}}.afharvey.com
+    http:
+      paths:
+        - backend:
+            serviceName: {{PROJECT_NAME}}
+            servicePort: 80
