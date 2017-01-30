@@ -5,9 +5,10 @@ metadata:
   name: {{PROJECT_NAME}}
 spec:
   rules:
-    host: {{PROJECT_NAME}}.afharvey.com
+  - host: {{PROJECT_NAME}}.afharvey.com
     http:
       paths:
-        - backend:
-            serviceName: {{PROJECT_NAME}}
-            servicePort: 80
+      - path: /
+        backend:
+          serviceName: {{PROJECT_NAME}}
+          servicePort: 80
