@@ -28,8 +28,9 @@ deployment:
     commands:
       - sudo /opt/google-cloud-sdk/bin/gcloud docker push eu.gcr.io/${GCP_PROJECT}/${PROJECT_NAME}
       - sudo chown -R ubuntu:ubuntu /home/ubuntu/.kube
-      - kubectl apply -f .gcloud/service.yaml --namespace=$GCP_NAMESPACE
-      - sed -e "s/{{IMAGE_TAG}}/$CIRCLE_SHA1/g" --in-place .gcloud/deployment.yaml
-      - sed -e "s/{{PROJECT_NAME}}/$PROJECT_NAME/g" --in-place .gcloud/deployment.yaml
-      - sed -e "s/{{GCP_PROJECT}}/$GCP_PROJECT/g" --in-place .gcloud/deployment.yaml
-      - kubectl apply -f .gcloud/deployment.yaml --namespace=$GCP_NAMESPACE
+      - sed -e "s/{{IMAGE_TAG}}/$CIRCLE_SHA1/g" --in-place deploy/*.yaml
+      - sed -e "s/{{GCP_PROJECT}}/$GCP_PROJECT/g" --in-place deploy/*.yaml
+      - sed -e "s/{{PROJECT_NAME}}/$PROJECT_NAME/g" --in-place deploy/*.yaml
+      - kubectl apply -f deploy/service.yaml --namespace=$GCP_NAMESPACE
+      - kubectl apply -f deploy/deployment.yaml --namespace=$GCP_NAMESPACE
+      - kubectl apply -f deploy/ingress.yaml --namespace=$GCP_NAMESPACE
