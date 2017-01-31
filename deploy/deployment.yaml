@@ -18,7 +18,7 @@ spec:
       containers:
       - name: "server"
         image: "eu.gcr.io/{{GCP_PROJECT}}/{{PROJECT_NAME}}:{{IMAGE_TAG}}"
-        imagePullPolicy: "Always"
+        imagePullPolicy: "IfNotPresent"
         volumeMounts:
         - name: "cacerts"
           mountPath: "/etc/ssl/certs"
