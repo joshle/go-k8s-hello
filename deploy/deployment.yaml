@@ -4,6 +4,10 @@ kind: Deployment
 metadata:
   name: {{PROJECT_NAME}}
 spec:
+  revisionHistoryLimit: 0
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
   replicas: 1
   template:
     metadata:
