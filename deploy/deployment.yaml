@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: {{PROJECT_NAME}}
 spec:
-  revisionHistoryLimit: 0
+  revisionHistoryLimit: 1
   strategy:
     rollingUpdate:
       maxUnavailable: 1
