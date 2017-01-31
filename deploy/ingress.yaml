@@ -13,3 +13,9 @@ spec:
       - backend:
           serviceName: {{PROJECT_NAME}}
           servicePort: 80
+  - host: hello.afharvey.com
+    http:
+      paths:
+      - backend:
+          serviceName: {{PROJECT_NAME}}
+          servicePort: 80
