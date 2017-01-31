@@ -12,7 +12,6 @@ spec:
   template:
     metadata:
       labels:
-        app: {{PROJECT_NAME}}
         name: {{PROJECT_NAME}}
     spec:
       containers:

@@ -2,7 +2,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: {{PROJECT_NAME}}
+  name: {{PROJECT_NAME}}-ingress
   annotations:
     kubernetes.io/ingress.class: 'nginx'
 spec:
@@ -10,7 +10,6 @@ spec:
   - host: {{PROJECT_NAME}}.afharvey.com
     http:
       paths:
-      - path: /
-        backend:
-          serviceName: {{PROJECT_NAME}}
+      - backend:
+          serviceName: {{PROJECT_NAME}}-service
           servicePort: 80
