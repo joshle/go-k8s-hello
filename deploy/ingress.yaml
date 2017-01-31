@@ -12,12 +12,12 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: {{PROJECT_NAME}}
+          serviceName: {{PROJECT_NAME}}-svc
           servicePort: 80
   - host: hello.afharvey.com
     http:
       paths:
       - path: /
         backend:
-          serviceName: {{PROJECT_NAME}}
+          serviceName: {{PROJECT_NAME}}-svc
           servicePort: 80
