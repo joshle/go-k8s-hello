@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	port = flag.String("port", "8080", "http port default 80")
+	port = flag.String("port", "8080", "http port default 8080")
 )
 
 func main() {
