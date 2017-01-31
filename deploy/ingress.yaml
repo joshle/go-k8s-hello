@@ -8,7 +8,6 @@ spec:
   - host: {{PROJECT_NAME}}.afharvey.com
     http:
       paths:
-      - path: /
-        backend:
+      - backend:
           serviceName: {{PROJECT_NAME}}
           servicePort: 80
