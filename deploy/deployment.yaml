@@ -3,11 +3,8 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: {{PROJECT_NAME}}
+  namespace: default
 spec:
-  revisionHistoryLimit: 1
-  strategy:
-    rollingUpdate:
-      maxUnavailable: 1
   replicas: 1
   template:
     metadata:
@@ -18,7 +15,7 @@ spec:
       containers:
       - name: "server"
         image: "eu.gcr.io/{{GCP_PROJECT}}/{{PROJECT_NAME}}:{{IMAGE_TAG}}"
-        imagePullPolicy: "IfNotPresent"
+        imagePullPolicy: "Always"
         volumeMounts:
         - name: "cacerts"
           mountPath: "/etc/ssl/certs"
