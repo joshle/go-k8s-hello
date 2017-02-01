@@ -21,7 +21,7 @@ spec:
           mountPath: "/etc/ssl/certs"
           readOnly: true
         ports:
-        - containerPort: 8080
+        - containerPort: 80
           protocol: "TCP"
       volumes:
       - name: "cacerts"

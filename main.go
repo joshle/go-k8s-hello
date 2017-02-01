@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	port = flag.String("port", "8080", "http port default 8080")
+	port = flag.String("port", "80", "http port default 80")
 )
 
 func main() {
@@ -26,5 +26,6 @@ func main() {
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	log.Printf("%s: %s", r.Method, r.URL.String())
+	w.WriteHeader(200)
 	_, _ = w.Write([]byte("hello"))
 }
