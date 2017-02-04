@@ -32,6 +32,4 @@ deployment:
       - sed -e "s/{{GCP_PROJECT}}/$GCP_PROJECT/g" --in-place deploy/*.yaml
       - sed -e "s/{{PROJECT_NAME}}/$PROJECT_NAME/g" --in-place deploy/*.yaml
       - cat deploy/*.yaml
-      - kubectl apply -f deploy/service.yaml --namespace=$GCP_NAMESPACE
-      - kubectl apply -f deploy/deployment.yaml --namespace=$GCP_NAMESPACE
-      - kubectl apply -f deploy/ingress.yaml --namespace=$GCP_NAMESPACE
+      - kubectl apply -f deploy/*.yaml --namespace=$GCP_NAMESPACE
