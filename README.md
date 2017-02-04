@@ -4,6 +4,8 @@
 
 "HELLO WORLD" ~ Golang, Kubernetes, Microservice, GCP, CircleCI
 
+https://go-k8s-hello.afharvey.com
+
 ```
 $ go run main.go 
 2017/01/21 13:07:07 starting, will listen on port 8080
