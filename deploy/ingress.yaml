@@ -2,14 +2,21 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: {{PROJECT_NAME}}
+  name: {{PROJECT-NAME}}
   namespace: default
+  annotations:
+    kubernetes.io/ingress.class: 'nginx'
+    kubernetes.io/tls-acme: 'true'
 spec:
+  tls:
+    - hosts:
+      - {{PROJECT-NAME}}.afharvey.com
+      secretName: '{{PROJECT-NAME}}-afharvey-com'
   rules:
-  - host: {{PROJECT_NAME}}.afharvey.com
+  - host: go-k8s-hello.afharvey.com
     http:
       paths:
       - path: /
         backend:
-          serviceName: {{PROJECT_NAME}}
+          serviceName: {{PROJECT-NAME}}
           servicePort: 80
